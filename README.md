@@ -11,7 +11,7 @@ TL;DR / summary: AI is cool! Right? Why does it take large budgets and/or severa
   --It allows any Python "callable" to represent what is traditionally thought of as a Neuron, or Layer, or as previously mentioned - literally any phase of the network.
 
 
-I will be using this in ways that I hope will set the standard for AI research going forward, and hopefully break it free from the shackles of GPU/specilized hardware.
+I will be using this in ways that I hope will set the standard for AI research going forward, and hopefully break it free from the shackles of GPU/specialized hardware.
 
 
 If you are interested, please clone and contribute!
