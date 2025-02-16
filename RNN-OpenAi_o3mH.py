@@ -1,4 +1,4 @@
-#! Suggested by ChatGPT 03-mini-high
+#! Suggested by ChatGPT o3-mini-high
 
 # Input/Output node (as in your feed-forward example).
 nIO = Base(
