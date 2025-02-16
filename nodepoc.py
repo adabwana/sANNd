@@ -102,7 +102,7 @@ nIO = Base(
 nNeu = {
     "name": "hidden ",
     "activate": softplus,
-    "term": lambda self, input: input + self.bias # -should probably be split the activation into it's own node...
+    "term": lambda self, input: input + self.bias
 }
 
 nAct = {
