@@ -1,3 +1,6 @@
+from pynn import *
+
+
 #! Suggested by ChatGPT o3-mini-high
 
 # Input/Output node (as in your feed-forward example).

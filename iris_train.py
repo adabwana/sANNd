@@ -3,73 +3,8 @@ import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from pynn import *
 
-# ----------------------------
-# Core Framework Code (Base)
-# ----------------------------
-class Base:
-    def __init__(self, parent=None, name="Base", base=None, connections=None, **definition):
-        base = base or {}
-        self.connections = connections or []
-        
-        # Merge user definitions into the instance dictionary.
-        self.apply(self.__dict__, base if type(base) is dict else base.__dict__)
-        self.apply(self.__dict__, definition.get("base", {}))
-        self.apply(self.__dict__, definition)
-        
-        self.parent = parent or None
-        self.name = (f"{parent.get('name')}." if parent else "") + f"{name or definition.get('name') or base.get('name')}" or "Base"
-        
-        if "term" not in self.__dict__:
-            self.term = lambda self, input: input
-
-    def __call__(self, input):
-       return self.influence(input)
-
-    def apply(self, target_dict, definition):
-        if type(target_dict) is not dict or type(definition) is not dict:
-            return
-        target_dict.update({k: v for k, v in definition.items() if not isinstance(v, dict)})
-        for k, v in definition.items():
-            if isinstance(v, dict):
-                if k in target_dict and isinstance(target_dict[k], dict):
-                    self.apply(target_dict[k], v)
-                else:
-                    target_dict[k] = v
-
-    def connect(self, node_class=None, base={}, **definition):
-        if not node_class or type(node_class) is dict:
-            if type(node_class) is dict:
-                base = node_class
-            node_class = self.__class__
-        if not isinstance(node_class, Base):
-            target = node_class(parent=self, base=base, **definition)
-        else:
-            target = node_class.copy(**definition)
-        self.connections.append(target)
-        return target
-
-    def copy(self, **definition):
-        copy = self.__dict__.copy()
-        self.apply(copy, definition)
-        return self.__class__(**copy)
-
-    def get(self, index):
-        return self.__dict__.get(index)
-
-    def influence(self, input):
-        if self.parent:
-            output = self.term(self, input)
-        else:
-            output = input
-        
-        if self.connections:
-            output = sum([conn.influence(output) for conn in self.connections])
-        
-        if not self.parent:
-            output = self.term(self, output)
-        
-        return output
 
 # ----------------------------
 # Define the Network
