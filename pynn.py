@@ -5,7 +5,7 @@ import numpy as np
 from funcs import *  # custom script containing activation functions (softplus, softmax, relu, etc.)
 
 class Base:
-    def __init__(self, parent=None, name="Base", base=None, connections=None, **definition):
+    def __init__(self, base=None, name=None, parent=None, connections=None, **definition):
         # Initialize optionals
         base = base or {}
         self.connections = connections or []
@@ -52,7 +52,7 @@ class Base:
 
         # First positional arg can be either a class or instanciated variable descended from Base.
         if not isinstance(node_class, Base):
-            target = node_class(parent=self, base=base, **definition)
+            target = node_class(base=base, parent=self, **definition)
         else:
             target = node_class.copy(**definition)
 
