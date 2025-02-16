@@ -9,6 +9,7 @@ dQS_definition = {
     "name": "test",
     "term": lambda self, input: input + len(self.name)
 }
+
 nQS = Base(dQS_definition)
 
 or
