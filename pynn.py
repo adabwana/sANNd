@@ -83,8 +83,10 @@ class Base:
             # Check if the outputs seem to be vector-like (lists or numpy arrays)
             if outputs and isinstance(outputs[0], (list, np.ndarray)):
                 output = np.array(outputs).sum(axis=0)
-            else:
+            elif type(outputs[0]) in (float, int):
                 output = sum(outputs)
+            else:
+                output = outputs[0]
 
         if not self.parent:
             output = self.term(self, output)
