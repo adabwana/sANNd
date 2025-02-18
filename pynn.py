@@ -18,9 +18,13 @@ class Base:
         # Setup identity.
         self.parent = parent or None
         self.name = (f"{parent.get('name')}." if parent else "") + f"{name or definition.get('name') or base.get('name')}" or "Base"
+    
+        # Provide default terms.
+        if "input_term" not in self.__dict__:
+            self.input_term = lambda self, input: input
         
-        if "term" not in self.__dict__: # Provide default term.
-            self.term = lambda self, input: input
+        if "output_term" not in self.__dict__:
+            self.output_term = lambda self, output: output
 
     def __call__(self, input):
        # Shortcut for influence/intended external input interface.
@@ -73,8 +77,8 @@ class Base:
 
     def influence(self, input):
         # Process input and propagate through connections.
-        if self.parent:
-            output = self.term(self, input)
+        if "input_term" in self.__dict__ and callable(self.input_term):
+            output = self.input_term(self, input)
         else:
             output = input
         
@@ -88,8 +92,9 @@ class Base:
             else:
                 output = outputs[0]
 
-        if not self.parent:
-            output = self.term(self, output)
+        if "output_term" in self.__dict__ and callable(self.output_term):
+            output = self.output_term(self, output)
+        
 
         return output
 
