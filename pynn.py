@@ -92,3 +92,11 @@ class Base:
             output = self.term(self, output)
 
         return output
+
+    def learn(self, learning_rate=0.01, **lesson):
+        for adj in lesson:
+            if adj in self.__dict__:
+                self[adj] -= learning_rate * lesson[adj]
+
+        if self.parent and self is self.parent.connecions[0]:
+            self.parent.learn(**lesson)
