@@ -1,6 +1,6 @@
-pyNN - AI research sandbox. Each phase of the network is customizable via inputed terms and connections. Basis for planned TI project.
+sANNd (renamed as pyNN is taken) - AI research sandbox. Each phase of the network is customizable via inputed terms and connections. 
 
-This project's goal is to be the basis of a much larger project. For now, the focus is targeted on solidifying the foundation: pyNN.
+This project's goal is to be the basis of a much larger project. For now, the focus is targeted on solidifying the foundation: sANNd.
 
 TL;DR / summary: AI is cool! Right? Why does it take large budgets and/or several datacenters to produce reasonable responses within a resaonable timeframe?
 
