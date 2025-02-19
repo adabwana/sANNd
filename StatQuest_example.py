@@ -8,24 +8,24 @@ from pynn import *
 nIO = Base(
     name = "i/o node",
     bias = -0.58,
-    term = lambda self, input: input + self.bias
+    output_term = lambda self, input: input + self.bias
 )
 
 # Define common dictionaries.
 nNeu = {
     "name": "hidden ",
     "activate": softplus,
-    "term": lambda self, input: input + self.bias
+    "input_term": lambda self, input: input + self.bias
 }
 
 nAct = {
     "name": "softplus",
-    "term": lambda self, input: softplus(input)
+    "input_term": lambda self, input: softplus(input)
 }
 
 nCon = {
     "name": "connection ",
-    "term": lambda self, input: scale(input, self.weight) # -scale is defined in funcs.py as x * y
+    "input_term": lambda self, input: scale(input, self.weight) # -scale is defined in funcs.py as x * y
 }
 
 # Connect nodes.
