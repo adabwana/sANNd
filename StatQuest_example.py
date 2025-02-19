@@ -14,7 +14,6 @@ nIO = Base(
 # Define common dictionaries.
 nNeu = {
     "name": "hidden ",
-    "activate": softplus,
     "input_term": lambda self, input: input + self.bias
 }
 

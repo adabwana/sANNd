@@ -35,7 +35,7 @@ class Base:
         if type(target_dict) is not dict or type(definition) is not dict:
             return # Fail-fast
 
-         # Update keys with non-dict values.
+        # Update keys with non-dict values.
         target_dict.update({k: v for k, v in definition.items() if not isinstance(v, dict)})
         
         # Recursively update keys that are dicts.
