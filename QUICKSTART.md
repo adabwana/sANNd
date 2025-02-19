@@ -7,7 +7,7 @@ Then define the nodes with dicts, or constructor parameters, terms must accept t
 
 dQS_definition = {
     "name": "test",
-    "term": lambda self, input: input + len(self.name)
+    "input_term": lambda self, input: input + len(self.name)
 }
 
 nQS = Base(dQS_definition)
@@ -25,7 +25,7 @@ print(nQS.get("name"),nQS(123))
 
 Connect to other nodes for a complete network:
 
-nQS.connect(Base, dQS_definition, name="test2", term=lambda self, input: input - len(self.name))
+nQS.connect(Base, dQS_definition, name="test2", input_term=lambda self, input: input - len(self.name))
 
 print(nQS.connections[0].get("name"),nQS(123))
 #Output: test.test2 117
