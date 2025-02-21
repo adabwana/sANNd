@@ -1,4 +1,4 @@
-from pynn import *
+from sANNd import *
 """
     Reproduce simple network example demonstrated in StatQuest with Josh Starmer:
         https://www.youtube.com/watch?v=CqOfi41LfDw

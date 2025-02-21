@@ -1,4 +1,4 @@
-from pynn import Base  # Import the pyNN Base class
+from sANNd import Base  # Import the pyNN Base class
 
 #! Suggested by ChatGPT o3-mini-high
 
@@ -6,7 +6,7 @@ from pynn import Base  # Import the pyNN Base class
 # Its term function checks for certain keywords and returns a quote.
 nMovieQuote = {
     "name": "movie quote responder",
-    "term": lambda self, input: (
+    "input_term": lambda self, input: (
          "May the Force be with you." if "star wars" in input.lower() else
          "I'm gonna make him an offer he can't refuse." if "godfather" in input.lower() else
          "There is no spoon." if "matrix" in input.lower() else
@@ -16,8 +16,7 @@ nMovieQuote = {
 
 # Create an input/output node that simply passes along the input.
 nIO = Base(
-    name="i/o node",
-    term=lambda self, input: input  # identity function
+    name="i/o node"
 )
 
 # Connect the movie quote responder node to the I/O node.

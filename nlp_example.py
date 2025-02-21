@@ -1,6 +1,6 @@
 import math
 from funcs import *  # (Optional, if you have any NLP‐related functions; not needed here)
-from pynn import *
+from sANNd import *
 
 # ----------------------------
 # NLP Network Example
@@ -17,7 +17,7 @@ nIO = Base(
 # it returns "Another day in paradise!" otherwise it returns a default reply.
 nNLP = {
     "name": "nlp responder",
-    "term": lambda self, input: "Another day in paradise!" if input == "How are you this morning?" else "I don't understand."
+    "input_term": lambda self, input: "Another day in paradise!" if input == "How are you this morning?" else "I don't understand."
 }
 
 # Connect the i/o node to the NLP responder.

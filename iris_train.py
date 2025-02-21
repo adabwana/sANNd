@@ -3,7 +3,7 @@ import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from pynn import *
+from sANNd import *
 
 
 # ----------------------------
@@ -20,7 +20,7 @@ nIO = Base(
 # Connection node: scales its input by a learnable weight.
 nCon = {
     "name": "connection",
-    "term": lambda self, input: input * self.weight
+    "input_term": lambda self, input: input * self.weight
 }
 
 # Hidden node: applies a sigmoid activation with bias.
@@ -28,14 +28,14 @@ nNeu = {
     "name": "hidden",
     "bias": 0.1,
     "activate": lambda x: 1 / (1 + math.exp(-x)),
-    "term": lambda self, input: self.activate(input + self.bias)
+    "input_term": lambda self, input: self.activate(input + self.bias)
 }
 
 # Output node: simply passes the input (with its own bias, if desired).
 nOut = {
     "name": "output",
     "bias": 0.0,
-    "term": lambda self, input: input + self.bias
+    "input_term": lambda self, input: input + self.bias
 }
 
 # Wire up the network:

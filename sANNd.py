@@ -98,7 +98,7 @@ class Base:
         
         if self.taps:
             for tap in self.taps:
-                tap(output)
+                tap(self, output)
 
         return output
 
@@ -109,14 +109,12 @@ class Base:
 
         if self.parent and self is self.parent.connecions[0]:
             self.parent.learn(**lesson)
-    
-    #def ref(self, value):
-    #    return [value]
 
     def tap(self, receiver, source=None):
-        if source or source == self.name:
-            self.taps.append(receiver)
-        elif self.connections:
-            [conn.tap(receiver, source) for conn in self.connections]
+        if receiver is not None:
+            if source or source == self.name:
+                self.taps.append(receiver)
+            elif self.connections:
+                [conn.tap(receiver, source) for conn in self.connections]
                 
         

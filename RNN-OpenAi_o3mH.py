@@ -1,4 +1,4 @@
-from pynn import *
+from sANNd import *
 
 
 #! Suggested by ChatGPT o3-mini-high
@@ -20,7 +20,7 @@ nRNN = {
     "recurrence_weight": 0.8,   # weight on previous state
     "bias": 0.1,                # bias for the recurrent cell
     "activate": math.tanh,      # activation function (could also use softplus, etc.)
-    "term": lambda self, input: 
+    "input_term": lambda self, input: 
          (lambda prev, new: (setattr(self, 'state', new), new)[1])(
              self.state, 
              self.activate(input + self.recurrence_weight * self.state + self.bias)
