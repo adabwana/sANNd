@@ -1,11 +1,12 @@
+import sys
+sys.path.append('src/mould/mould')
 from mould import *
 import math
 
 """
-    Reproduce simple network example demonstrated in StatQuest with Josh Starmer:
-        https://www.youtube.com/watch?v=CqOfi41LfDw
+Reproduce simple network example demonstrated in StatQuest with Josh Starmer:
+https://www.youtube.com/watch?v=CqOfi41LfDw
 """
-
 # Callables
 def scale(x, y):
     print("scale", x, y)

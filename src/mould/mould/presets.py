@@ -1,8 +1,27 @@
+"""
+Presets for common neural network architectures and components.
+"""
+
+import random
+import math
+from typing import List, Optional, Callable, Any
+
+try:
+    import fasttext
+    FASTTEXT_AVAILABLE = True
+except ImportError:
+    FASTTEXT_AVAILABLE = False
+
+from .mould import Mould
+from .activations import sigmoid, tanh, relu
+
 nNormalize = {
     "name": "normalize",
-    "mean": 0.0,      # Default mean; can be updated by the user.
-    "std": 1.0,       # Default standard deviation; can be updated.
-    "term": lambda self, input: (input - self.mean) / self.std
+    "description": "Normalizes input values to a range of [0, 1]",
+    "parameters": {
+        "min_val": 0.0,
+        "max_val": 1.0
+    }
 }
 
 nTokenize = {
@@ -58,31 +77,34 @@ nIO.connect(Base, nTokenize) \
 \"""
 """
 
-import fasttext
+# Preset for word embeddings using FastText
+if FASTTEXT_AVAILABLE:
+    try:
+        fasttext_model = fasttext.load_model("cc.en.300.bin")
+    except:
+        print("Warning: Could not load FastText model. Word embedding features will be disabled.")
+        fasttext_model = None
+else:
+    fasttext_model = None
 
-# Load the pre-trained model (ensure the path is correct)
-fasttext_model = fasttext.load_model("cc.en.300.bin")
+def get_word_embedding(word: str) -> List[float]:
+    """Get word embedding vector using FastText"""
+    if not FASTTEXT_AVAILABLE or fasttext_model is None:
+        return [random.uniform(-0.1, 0.1) for _ in range(300)]  # Fallback to random embeddings
+    return fasttext_model.get_word_vector(word).tolist()
 
-# Define a fastText embedding node using dictionary-based customization
-nFastTextEmbedding = {
-    "name": "fastText embedding",
-    "embedding_model": fasttext_model,
-    "vector_size": 300,
-    # The term function receives a list of tokens and returns a list of vectors.
-    "term": lambda self, tokens: [self.embedding_model.get_word_vector(token) for token in tokens]
+# Common activation function presets
+activation_presets = {
+    "sigmoid": {
+        "func": sigmoid,
+        "description": "Sigmoid activation function"
+    },
+    "tanh": {
+        "func": tanh,
+        "description": "Hyperbolic tangent activation function"
+    },
+    "relu": {
+        "func": relu,
+        "description": "Rectified Linear Unit activation function"
+    }
 }
-
-"""
-# Tokenization node (simple whitespace split)
-nTokenize = {
-    "name": "tokenize",
-    "term": lambda self, input: input.lower().split()
-}
-
-# Create the input node.
-nIO = Base(name="i/o node", term=lambda self, input: input)
-
-# Chain tokenization and fastText embedding nodes.
-nIO.connect(Base, nTokenize) \
-   .connect(Base, nFastTextEmbedding)
-"""

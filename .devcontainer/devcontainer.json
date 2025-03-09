@@ -1,0 +1,29 @@
+{
+    "name": "Python Development",
+    "build": {
+        "dockerfile": "DockerFile",
+        "context": "."
+    },
+    "runArgs": [
+        "--gpus=all"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "ms-python.black-formatter"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.formatting.provider": "black",
+                "editor.formatOnSave": true,
+                "python.formatting.blackArgs": ["--line-length", "88"]
+            }
+        }
+    },
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "remoteUser": "root"
+}

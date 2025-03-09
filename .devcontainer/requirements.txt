@@ -1,0 +1,9 @@
+numpy
+fasttext
+
+typing-extensions
+
+black
+jupyterlab
+ipykernel
+pytest-describe

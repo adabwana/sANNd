@@ -37,7 +37,7 @@ def softmax(x):
 def softplus(x):
     return math.log(1 + math.exp(x))
 
-def d_softplus(x):
+def d_softplus(x): # derivative of softplus
     return 1 / (1 + math.exp(-x))
 
 def scale(x, y):

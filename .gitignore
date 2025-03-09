@@ -1,0 +1,4 @@
+.*
+!.devcontainer
+!.gitignore
+__pycache__

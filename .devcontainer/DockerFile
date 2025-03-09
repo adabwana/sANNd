@@ -1,0 +1,14 @@
+FROM python:3.11-slim
+
+# Install git for development
+RUN apt-get update && apt-get install -y \
+    git \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /workspaces/${localWorkspaceFolderBasename}
+
+# Copy requirements and install Python packages
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir -r requirements.txt
