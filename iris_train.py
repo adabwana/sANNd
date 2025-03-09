@@ -14,7 +14,7 @@ from sANNd import *
 nIO = Base(
     name="i/o node",
     bias=0.0,
-    term=lambda self, input: input + self.bias
+    input_term=lambda self, input: input + self.bias
 )
 
 # Connection node: scales its input by a learnable weight.

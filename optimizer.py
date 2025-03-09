@@ -6,8 +6,8 @@ class Optimizer:
         self.beta1 = beta1
         self.beta2 = beta2
         self.epsilon = epsilon
-        self.m = None  # first moment estimate
-        self.v = None  # second moment estimate
+        self.m = 0  # first moment estimate
+        self.v = 0.5  # second moment estimate
 
     def zero_grad(self):
         if self.m is not None:
@@ -19,7 +19,7 @@ class Optimizer:
         if self.m is not None and self.v is not None:
             self.m = self.beta1 * self.m + (1 - self.beta1) * (y - x)
             self.v = self.beta2 * self.v + (1 - self.beta2) * (np.square(y - x))
-            return self.x - self.learning_rate * self.m / np.sqrt(self.v + self.epsilon)
+            return x - self.learning_rate * self.m / np.sqrt(self.v + self.epsilon)
         else:
             raise ValueError("Optimizer requires first and second moment estimates")
 

@@ -257,3 +257,5 @@ def softplus_derivative(x):
     """
     return 1 / (1 + math.exp(-x))
 
+def scale(x, y):
+    return x * y
